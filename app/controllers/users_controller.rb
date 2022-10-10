@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
+  # create method that responds to a POST /signup request
     def create
         user = User.create(user_params)
 
-        if user.valid?
+        if user
 
             session[:user_id] = user.id
             render json: user, status: :created
@@ -13,10 +14,9 @@ class UsersController < ApplicationController
         end
     end
         
-      
+    # show method that responds to a GET /me request.
       def show
-        # user = User.find_by(id: session[:user_id])
-        # render json: user, status: :ok
+       
         user = User.find_by(id: session[:user_id])
         
         if user
